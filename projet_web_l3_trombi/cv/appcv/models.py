@@ -96,4 +96,3 @@ class CV(models.Model):
 
     def __str__(self):
         return f"CV de {self.personne.prenom} {self.personne.nom}"
-.
