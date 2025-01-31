@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Informations Personnelles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 400px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            color: #0056b3;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        img {
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+        .no-photo {
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mes Informations Personnelles</h1>
+        {% if personne %}
+            <p><strong>Nom :</strong> {{ personne.nom }}</p>
+            <p><strong>Prénom :</strong> {{ personne.prenom }}</p>
+            <p><strong>Date de Naissance :</strong> {{ personne.date_naissance }}</p>
+            <p><strong>Photo :</strong></p>
+            {% if personne.photo %}
+                <img src="{{ personne.photo.url }}" alt="Photo de profil" width="150">
+            {% else %}
+                <p class="no-photo">Aucune photo disponible.</p>
+            {% endif %}
+        {% else %}
+            <p>Aucune information personnelle disponible.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Créer un CV</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'boite.css' %}">
+</head>
+
+<body>
+    <h1>Créer un CV</h1>
+
+    <!-- Formulaire de vérification du mot de passe -->
+    <form method="POST">
+        {% csrf_token %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_personne' %}'">créer ou modifier mon
+                    profil</button>
+            </div>
+
+            <br> <br>
+
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_contact' %}'">créer ou modifier mes
+                    contacte</button>
+            </div>
+
+            <br> <br>
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_formation' %}'">Ajouter une
+                    formation</button>
+            </div>
+
+            <br> <br>
+
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_competence' %}'">Ajouter une
+                    compétence</button>
+            </div>
+
+            <br> <br>
+
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_experience' %}'">Ajouter une
+                    expérience</button>
+            </div>
+            <br> <br>
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_loisir' %}'">Ajouter un
+                    loisir</button>
+            </div>
+
+            <br> <br>
+
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_langue' %}'">Ajouter une
+                    langue</button>
+            </div>
+
+            <br> <br>
+
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_cv' %}'">Ajouter un cv</button>
+            </div>
+
+        </form>
+        {% block content %}
+        {% endblock %}
+</body>
+
+</html>

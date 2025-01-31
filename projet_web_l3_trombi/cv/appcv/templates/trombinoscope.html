@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trombinoscope</title>
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #f4f4f4, #e8e8e8);
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0056b3;
+            margin: 20px 0;
+            font-size: 2.5rem;
+        }
+
+        /* Liens de navigation */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .navigation a:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        /* Conteneur du trombinoscope */
+        .trombinoscope-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Carte de chaque personne */
+        .person-card {
+            text-align: center;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .person-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .person-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 3px solid #007BFF;
+        }
+
+        .person-card p {
+            margin: 10px 0;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .person-card a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .person-card a:hover {
+            color: #0056b3;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .person-card img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .navigation a {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Trombinoscope</h1>
+    <div class="navigation">
+        <a href="{% url 'formulaire' %}">CONNEXION</a>
+        <a href="{% url 'register' %}">INSCRIPTION</a>
+    </div>
+    <div class="trombinoscope-container">
+        {% for item in data %}
+        <div class="person-card">
+            {% if item.personne.photo and item.personne.photo.url %}
+                <a href="{% if item.premier_cv %}{% url 'cv_detail' item.premier_cv.id %}{% else %}#{% endif %}">
+                    <img src="{{ item.personne.photo.url }}" alt="Photo de {{ item.personne.prenom }} {{ item.personne.nom }}">
+                </a>
+            {% else %}
+                <p>Aucune photo</p>
+            {% endif %}
+            <p>{{ item.personne.prenom }}<br>{{ item.personne.nom }}</p>
+            {% if item.premier_cv %}
+                <a href="{% url 'cv_detail' item.premier_cv.id %}">Voir le CV</a>
+            {% else %}
+                <p>Aucun CV disponible</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
